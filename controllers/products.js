@@ -1,12 +1,11 @@
-const { getProductById } = require('../db/models/product');
+const { fetchProduct } = require('../db/models/product');
 
 exports.getProduct = (req, res, next) => {
   const { id } = req.params;
-  const today = new Date();
 
-  getProductById(id)
+  fetchProduct(id)
     .then(([product]) => {
-      res.status(200).send({ product });
+      res.status(200).send(product);
     })
     .catch(next);
 };

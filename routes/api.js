@@ -1,7 +1,7 @@
 const apiRouter = require('express').Router();
-const { reviewsRouter, productRouter } = require('../routes/reviews');
+const { productRouter } = require('../routes/products');
 
 // apiRouter.use('/reviews', reviewsRouter);
-// apiRouter.use('/product', productRouter);
+apiRouter.use('/product', productRouter);
 
 module.exports = apiRouter;

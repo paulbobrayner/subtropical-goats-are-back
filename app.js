@@ -12,3 +12,5 @@ app.use(
 );
 
 app.use('/api', apiRouter);
+
+module.exports = app;

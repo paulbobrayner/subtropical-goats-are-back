@@ -1,6 +1,6 @@
 const reviewsRouter = require('express').Router();
-const { getReviews } = require('../controllers/reviews.js');
+const { postReview } = require('../controllers/reviews.js');
 
-//reviewsRouter.route('/:id').get(getReviews);
+reviewsRouter.route('/').post(postReview);
 
 module.exports = { reviewsRouter };

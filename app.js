@@ -17,6 +17,11 @@ app.use(
 app.use(express.json());
 app.use('/api', apiRouter);
 
+app.use((err, req, res, next) => {
+  console.log('ERROR', err);
+  res.send('error', err);
+});
+
 const httpServer = createServer(app);
 httpServer.listen(9081, () => console.log(`listening on 9081`));
 

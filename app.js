@@ -7,7 +7,13 @@ const apiRouter = require('./routes/api');
 require('dotenv').config();
 const { fetchReviews } = require('./db/models/reviews');
 
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: process.env.CORS_ORIGIN,
+    allowedHeaders: ['content-type'],
+  })
+);
 app.use(express.json());
 
 const httpServer = createServer(app);
@@ -17,7 +23,7 @@ const io = new Server(httpServer, {
   /* options */
   cors: {
     origin: process.env.CORS_ORIGIN,
-    methods: ['GET', 'POST'],
+    allowedHeaders: ['content-type'],
     credentials: true,
   },
 });

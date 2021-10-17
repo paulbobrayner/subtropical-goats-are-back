@@ -15,6 +15,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use('/api', apiRouter);
 
 const httpServer = createServer(app);
 httpServer.listen(9081, () => console.log(`listening on 9081`));
@@ -36,7 +37,5 @@ io.on('connection', (socket) => {
     });
   });
 });
-
-app.use('/api', apiRouter);
 
 module.exports = app;

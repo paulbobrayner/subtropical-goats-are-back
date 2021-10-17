@@ -16,7 +16,7 @@ httpServer.listen(9081, () => console.log(`listening on 9081`));
 const io = new Server(httpServer, {
   /* options */
   cors: {
-    origin: 'http://localhost:3000',
+    origin: process.env.CORS_ORIGIN,
     methods: ['GET', 'POST'],
     credentials: true,
   },

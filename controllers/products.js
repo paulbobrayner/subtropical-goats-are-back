@@ -7,5 +7,8 @@ exports.getProduct = (req, res, next) => {
     .then(([product]) => {
       res.status(200).send(product);
     })
-    .catch(next);
+    .catch((err) => {
+      console.log(err);
+      res.send('Error with getting product', err);
+    });
 };

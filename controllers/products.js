@@ -9,6 +9,7 @@ exports.getProduct = (req, res, next) => {
     })
     .catch((err) => {
       console.log(err);
-      res.send('Error with getting product', err);
+      res.status(500).send('Error with getting product', err);
+      next(err);
     });
 };

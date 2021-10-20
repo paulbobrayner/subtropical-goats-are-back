@@ -14,6 +14,10 @@ app.use(
     allowedHeaders: ['content-type'],
   })
 );
+
+const httpServer = createServer(app);
+httpServer.listen(9081, () => console.log(`listening on 9081`));
+
 app.use(express.json());
 app.use('/api', apiRouter);
 
@@ -22,19 +26,16 @@ app.use((err, req, res, next) => {
   res.send('error', err);
 });
 
-const httpServer = createServer(app);
-httpServer.listen(9081, () => console.log(`listening on 9081`));
-
 const io = new Server(httpServer, {
-  /* options */
   cors: {
     origin: process.env.CORS_ORIGIN,
     allowedHeaders: ['content-type'],
     credentials: true,
   },
 });
+
 io.on('connection', (socket) => {
-  console.log('connected');
+  console.log('connected', socket.id);
 
   socket.on('submitReview', function (id) {
     fetchReviews(id).then((reviews) => {

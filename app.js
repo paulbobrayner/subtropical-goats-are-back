@@ -7,17 +7,9 @@ const apiRouter = require('./routes/api');
 require('dotenv').config();
 const { fetchReviews } = require('./db/models/reviews');
 
-app.use(
-  cors({
-    credentials: true,
-    origin: process.env.CORS_ORIGIN,
-    allowedHeaders: ['content-type'],
-  })
-);
-
 const httpServer = createServer(app);
-httpServer.listen(9081, () => console.log(`listening on 9081`));
 
+app.use(cors());
 app.use(express.json());
 app.use('/api', apiRouter);
 
@@ -43,5 +35,7 @@ io.on('connection', (socket) => {
     });
   });
 });
+
+httpServer.listen(9081, () => console.log(`listening on 9081`));
 
 module.exports = app;

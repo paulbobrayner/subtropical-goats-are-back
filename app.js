@@ -9,7 +9,14 @@ const { fetchReviews } = require('./db/models/reviews');
 
 const httpServer = createServer(app);
 
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.CORS_ORIGIN,
+    allowedHeaders: ['content-type'],
+    methods: ['GET', 'POST'],
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use('/api', apiRouter);
 
@@ -22,6 +29,7 @@ const io = new Server(httpServer, {
   cors: {
     origin: process.env.CORS_ORIGIN,
     allowedHeaders: ['content-type'],
+    methods: ['GET', 'POST'],
     credentials: true,
   },
 });

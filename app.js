@@ -7,8 +7,6 @@ const apiRouter = require('./routes/api');
 require('dotenv').config();
 const { fetchReviews } = require('./db/models/reviews');
 
-const httpServer = createServer(app);
-
 app.use(
   cors({
     origin: process.env.CORS_ORIGIN,
@@ -17,6 +15,7 @@ app.use(
     credentials: true,
   })
 );
+
 app.use(express.json());
 app.use('/api', apiRouter);
 
@@ -25,7 +24,9 @@ app.use((err, req, res, next) => {
   res.send('error', err);
 });
 
-const io = require('socket.io')(httpServer, {
+const httpServer = createServer(app);
+
+const io = new Server(httpServer, {
   cors: {
     origin: process.env.CORS_ORIGIN,
     allowedHeaders: ['content-type'],

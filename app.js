@@ -6,6 +6,7 @@ const cors = require('cors');
 const apiRouter = require('./routes/api');
 require('dotenv').config();
 const { fetchReviews } = require('./db/models/reviews');
+const httpServer = createServer(app);
 
 app.use(
   cors({
@@ -23,8 +24,6 @@ app.use((err, req, res, next) => {
   console.log('ERROR', err);
   res.send('error', err);
 });
-
-const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
   cors: {
@@ -45,6 +44,8 @@ io.on('connection', (socket) => {
   });
 });
 
-httpServer.listen(9081, () => console.log(`listening on 9081`));
+const { PORT = 9081 } = process.env;
+
+httpServer.listen(PORT, () => console.log(`listening on ${PORT}`));
 
 module.exports = app;

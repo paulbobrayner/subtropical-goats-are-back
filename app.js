@@ -25,7 +25,7 @@ app.use((err, req, res, next) => {
   res.send('error', err);
 });
 
-const io = new Server(httpServer, {
+const io = require('socket.io')(httpServer, {
   cors: {
     origin: process.env.CORS_ORIGIN,
     allowedHeaders: ['content-type'],

@@ -39,7 +39,7 @@ io.on('connection', (socket) => {
 
   socket.on('submitReview', function (id) {
     fetchReviews(id).then((reviews) => {
-      socket.emit('reviewsUpdate', reviews);
+      io.emit('reviewsUpdate', reviews);
     });
   });
 });
